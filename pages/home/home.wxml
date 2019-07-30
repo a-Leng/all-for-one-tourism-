@@ -1,0 +1,214 @@
+<!-- 标题部分 start -->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}" isCustom="{{false}}">
+  <view slot="backText">天门山</view>
+  <!-- <view slot="content">旅游攻略</view> -->
+  <view slot="right">
+    <text class='cuIcon-global'></text> 多云25°C
+  </view>
+</cu-custom>
+<!-- 标题部分 end -->
+
+<view class='main'>
+<!-- 地图or轮播  start -->
+  <view class='map'>
+    <map wx:if='{{currentTab==2}}' id="map" longitude="113.324520" latitude="23.099994" scale="14" show-location style="width:100%; height: 100%;"></map>
+    <swiper style='width:100%; height: 100%;' circular autoplay indicator-dots wx:if='{{currentTab!==2}}' indicator-color='rgba(255,255,255,1)' indicator-active-color='rgba(121,177,251,1)'>
+      <block wx:for='{{imgsUrl}}' wx:key='{{index}}'>
+        <swiper-item>
+          <image src='{{item}}' mode='widthFix'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+<!-- 地图or轮播  end -->
+
+<!-- 小程序nav  start -->
+  <view class='nav'>
+    <view class='item'>
+      <image src='../../images/techang.png'></image>
+      <view>特色特产</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/2.png'></image>
+      <view>养生保健</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/3.png'></image>
+      <view>休闲农家</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/4.png'></image>
+      <view>探险分享</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/5.png'></image>
+      <view>天气交通</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/6.png'></image>
+      <view>景区摆渡车</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/7.png'></image>
+      <view>门票预订</view>
+    </view>
+    <view class='item'>
+      <image src='../../images/8.png'></image>
+      <view>联系我们</view>
+    </view>
+  </view>
+<!-- 小程序nav  end -->
+
+<!-- 推荐区域  start-->
+  <view class='recommend'>
+    <!-- 推荐导航  start -->
+    <view class='recommend-nav'>
+      <view class='hotel-nav {{currentTab==0?"active":""}}' bindtap='selectTab' data-current='0'>酒店推荐</view>
+      <view class='catering-nav {{currentTab==1?"active":""}}' bindtap='selectTab' data-current='1'>餐饮推荐</view>
+      <view class='scenic-nav {{currentTab==2?"active":""}}' bindtap='selectTab' data-current='2'>景区推荐</view>
+    </view>
+    <!-- 推荐导航  end -->
+
+    <swiper bindchange='changeTab' current='{{currentTab}}' class='swiper'>
+      <!-- 酒店推荐  start -->
+      <swiper-item>
+        <view class='btns'>
+          <view>价格
+            <image src='/images/xiala.png'></image>
+          </view>
+          <view>距离
+            <image src='/images/xiala.png'></image>
+          </view>
+          <view>分类
+            <image src='/images/xiala.png'></image>
+          </view>
+        </view>
+        <scroll-view scroll-y class='recommend-public hotel-recommend'>
+          <view wx:for='{{hotelList}}' wx:key='{{index}}' class='hotel-item'>
+            <image src='{{item.imgpath}}' mode='widthFix'></image>
+            <view class='hotel-info'>
+              <view class='title'>{{item.title}}
+                <image src='/images/king.png'></image>
+              </view>
+              <view class='grade-info'>
+                <view><span>{{item.grade}}</span>{{item.grade_content}}</view>
+                <view>{{item.cost}}</view>
+              </view>
+              <view class='location'>
+                {{item.location}}
+              </view>
+              <view class='labels'>
+                <block wx:for='{{item.labels}}' wx:key='{{index}}'>
+                  <view wx:if='{{index==0||index==1}}' style='color:#ff4d0b'>{{item}}</view>
+                  <view wx:elif='{{index==2}}' style='color:#59bbee'>{{item}}</view>
+                  <view wx:else style='color:#333'>{{item}}</view>
+                </block>
+              </view>
+              <view class='prices'>
+                <view>低价房仅剩{{item.hotal}}间</view>
+                <view><span>￥ {{item.prices}} </span>起</view>
+              </view>
+              <view class='discounts'>
+                <span>已减{{item.discounts}}</span>
+                <image src='/images/problem.png'></image>
+              </view>
+            </view>
+          </view>
+          
+        </scroll-view>
+      </swiper-item>
+      <!-- 酒店推荐  end -->
+
+      <!-- 餐饮推荐  start -->
+      <swiper-item>
+        <view class='btns'>
+          <view>价格
+            <image src='/images/xiala.png'></image>
+          </view>
+          <view>距离
+            <image src='/images/xiala.png'></image>
+          </view>
+        </view>
+
+        <scroll-view scroll-y class='recommend-public catering-recommend'>
+          <view wx:for='{{cateringList}}' wx:key='{{index}}' class='catering-item'>
+            <view class='top-introduce'>
+              <image src='{{item.imgpath}}'></image>
+              <view class='introduce-content'>
+                <view class='title'>{{item.title}}</view>
+                <view class='price'>
+                  <view class='star'>{{item.star}}<span>￥{{item.price}}/人</span></view>
+                  <view class='distance'>{{item.distance}}米</view>
+                </view>
+                <view class='tabels'>
+                  <block wx:for='{{item.labels}}' wx:key='{{index}}'>
+                  <view>{{item}}</view>
+                  </block>
+                </view>
+                <view class='evaluate'>
+                  <block wx:for='{{item.evaluate}}' wx:key='{{index}}'>
+                  <view style='color:{{index==0?"#fb2":"#333"}};'>{{item}}</view>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view class='meituan-info'>
+              <view wx:if='{{item.group!==""}}' class='group'>
+                <span>团</span>
+                <view>{{item.group}}</view>
+              </view>
+              <view wx:if='{{item.coupons}}' class='coupons'>
+                <span>券</span>
+                <view>{{item.coupons}}</view>
+              </view>
+            </view>
+          </view>
+          
+        </scroll-view>
+      </swiper-item>
+      <!-- 餐饮推荐  end -->
+
+      <!-- 景区推荐  start -->
+      <swiper-item>
+        <view class='btns'>
+          <view class='ridership'>客流量
+            <image src='/images/xiala.png'></image>
+          </view>
+        </view>
+        <scroll-view scroll-y class='recommend-public scenic-recommend'>
+          <view wx:for='{{scenicList}}' wx:key='{{index}}' class='scenic-item'>
+            <view class='scenic-top'>
+              <image src='{{item.imgpath}}'></image>
+              <view class='scenic-info'>
+                <view class='title'>{{item.title}}</view>
+                <view class='scenic-grade'>
+                  <view>{{item.star}}<span>{{item.commet}}条评论</span></view>
+                  <view>{{item.location}}km</view>
+                </view>
+                <view class='scenic-labels'>
+                  <block wx:for='{{item.labels}}' wx:key='{{index}}'>
+                    <view>{{item}}</view>
+                  </block>
+                </view>
+                <view class='scenic-price'>
+                  <view class='price-info'><span>￥{{item.prices}} </span>起</view>
+                  <block wx:for='{{item.merit}}' wx:key='{{index}}'>
+                    <view wx:if='{{index==0}}' style='color:#fb2;' class='price-label'>{{item}}</view>
+                    <view wx:else style='color:#59bbee;' class='price-label'>{{item}}</view>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view class='visit-pro'>
+              项目：{{item.visit_pro}}
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+      <!-- 景区推荐  end -->
+
+    </swiper>
+
+  </view>
+<!-- 推荐区域  end -->
+</view>

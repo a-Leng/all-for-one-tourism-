@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "cu-custom": "/components/header-nav"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/home/home",
+      "text": "首页",
+      "iconPath": "/images/home.png",
+      "selectedIconPath": "/images/home-choise.png"
+    },
+    {
+      "pagePath": "pages/home/home",
+      "text": "旅游工商",
+      "iconPath": "/images/gongshang.png",
+      "selectedIconPath": "/images/gongshang-choice.png"
+    },
+    {
+      "pagePath": "pages/home/home",
+      "text": "首页",
+      "iconPath": "/images/home.png",
+      "selectedIconPath": "/images/home-choise.png"
+    },
+    {
+      "pagePath": "pages/home/home",
+      "text": "旅游法庭",
+      "iconPath": "/images/fating.png",
+      "selectedIconPath": "/images/fating-choice.png"
+    },
+    {
+      "pagePath": "pages/home/home",
+      "text": "我的",
+      "iconPath": "/images/mine.png",
+      "selectedIconPath": "/images/mine-chose.png"
+    }]
+  }
+}
